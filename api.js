@@ -1,4 +1,5 @@
 import axios from "axios";
+import { list } from "tar";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
 
@@ -22,8 +23,8 @@ class JoblyApi {
     const url = `${BASE_URL}/${endpoint}`;
     const headers = { Authorization: `Bearer ${JoblyApi.token}` };
     const params = (method === "get")
-        ? data
-        : {};
+      ? data
+      : {};
 
     try {
       return (await axios({ url, method, data, params, headers })).data;
@@ -43,10 +44,46 @@ class JoblyApi {
     return res.company;
   }
 
-  // obviously, you'll add a lot here ...
+
+  /** Get a list of listType, with optional filters.
+   *  @param listType can be either 'companies' or 'jobs'
+   *  @param filters is an object (optional).
+   *    - If listType is 'jobs' filters can contain: 'hasEquity', 'minSalary', 'title'
+   *    - If listType is 'companies' filters can contain: 'minEmployees', 'maxEmployees', 'name'
+   * 
+   *  @returns array of listType
+   */
+
+  static async getList(listType, filters = false) {
+
+    if (!listType) {
+      return console.alert(`listType must be defined, either 'companies' or 'jobs'`)
+    } else if (listType !== 'companies' && listType !== 'jobs') {
+      return console.alert(`listType: ${listType} is not acceptable`);
+    }
+    let reqString = `${listType}/?`;
+
+    if (filters) {
+      for (const [key, val] of Object.entries(filters)) {
+        reqString = reqString + `${key}=${val}&`
+      }
+    }
+    reqString = reqString.slice(0, -1);
+
+    let res = await this.request(reqString)
+    if (listType === 'companies') {
+      return res.companies;
+    } else if (listType === 'jobs') {
+      return res.jobs;
+    }
+
+    // to have an definitively reachable return, to make the linter happy.
+    return console.alert("I don't know how you're seeing this.")
+  }
+
 }
 
 // for now, put token ("testuser" / "password" on class)
 JoblyApi.token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZ" +
-    "SI6InRlc3R1c2VyIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTU5ODE1OTI1OX0." +
-    "FtrMwBQwe6Ue-glIFgz_Nf8XxRT2YecFCiSpYL0fCXc";
+  "SI6InRlc3R1c2VyIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTU5ODE1OTI1OX0." +
+  "FtrMwBQwe6Ue-glIFgz_Nf8XxRT2YecFCiSpYL0fCXc";
