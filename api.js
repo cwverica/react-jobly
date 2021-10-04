@@ -57,9 +57,9 @@ class JoblyApi {
   static async getList(listType, filters = false) {
 
     if (!listType) {
-      return console.alert(`listType must be defined, either 'companies' or 'jobs'`)
+      return console.error(`listType must be defined, either 'companies' or 'jobs'`)
     } else if (listType !== 'companies' && listType !== 'jobs') {
-      return console.alert(`listType: ${listType} is not acceptable`);
+      return console.error(`listType: ${listType} is not acceptable`);
     }
     let reqString = `${listType}/?`;
 
@@ -87,3 +87,5 @@ class JoblyApi {
 JoblyApi.token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZ" +
   "SI6InRlc3R1c2VyIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTU5ODE1OTI1OX0." +
   "FtrMwBQwe6Ue-glIFgz_Nf8XxRT2YecFCiSpYL0fCXc";
+
+export default JoblyApi;
