@@ -5,7 +5,7 @@ import { Link, NavLink } from "react-router-dom";
  *  Rendered by App.js so it's highest possible level.
 */
 
-function Navbar() {
+function Navbar(logout) {
 
     return (
         <nav className="Navbar">
@@ -30,5 +30,7 @@ function Navbar() {
                 </li>
             </ul>
         </nav>
-    )
+    );
 }
+
+export default Navbar;

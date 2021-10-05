@@ -1,9 +1,15 @@
 import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
+import Homepage from '../homepage/Homepage';
+import CompList from '../companies/CompList';
+import JobList from "../jobs/JobList";
+import CompDetail from "../companies/CompDetail";
+import LoginForm from "../auth/LoginForm";
+import ProfileForm from "../profiles/ProfileForm";
+import SignupForm from "../auth/SignupForm";
 
 // Skeleton of navigation for homepage
-function Routes() {
-    let login, signup; // will be functions later
+function Routes(login, signup) {
 
     return (
         <div>
@@ -13,11 +19,11 @@ function Routes() {
                 </Route>
 
                 <Route exact path="/companies">
-                    <CompanyList />
+                    <CompList />
                 </Route>
 
                 <Route exact path="/companies/:handle">
-                    <CompanyDetail />
+                    <CompDetail />
                 </Route>
 
                 <Route exact path="/jobs">
@@ -41,3 +47,5 @@ function Routes() {
         </div>
     )
 }
+
+export default Routes;
