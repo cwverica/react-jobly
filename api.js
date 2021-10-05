@@ -60,41 +60,6 @@ class JoblyApi {
 
 
 
-  // /** Get a list of listType, with optional filters.
-  //  *  @param listType can be either 'companies' or 'jobs'
-  //  *  @param filters is an object (optional).
-  //  *    - If listType is 'jobs' filters can contain: 'hasEquity', 'minSalary', 'title'
-  //  *    - If listType is 'companies' filters can contain: 'minEmployees', 'maxEmployees', 'name'
-  //  * 
-  //  *  @returns array of listType
-  //  */
-
-  // static async getList(listType, filters = false) {
-
-  //   if (!listType) {
-  //     return console.error(`listType must be defined, either 'companies' or 'jobs'`)
-  //   } else if (listType !== 'companies' && listType !== 'jobs') {
-  //     return console.error(`listType: ${listType} is not acceptable`);
-  //   }
-  //   let reqString = `${listType}/?`;
-
-  //   if (filters) {
-  //     for (const [key, val] of Object.entries(filters)) {
-  //       reqString = reqString + `${key}=${val}&`
-  //     }
-  //   }
-  //   reqString = reqString.slice(0, -1);
-
-  //   let res = await this.request(reqString)
-  //   if (listType === 'companies') {
-  //     return res.companies;
-  //   } else if (listType === 'jobs') {
-  //     return res.jobs;
-  //   }
-
-  //   // to have an definitively reachable return, to make the linter happy.
-  //   return console.alert("I don't know how you're seeing this.")
-  // }
 
 }
 
