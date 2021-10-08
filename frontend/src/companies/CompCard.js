@@ -9,7 +9,7 @@ function CompCard({ name, description, logoUrl, handle }) {
 
 
     return (
-        <Link className="CompCard" to={`/companies/${handle}`}>
+        <Link className="CompCard card" to={`/companies/${handle}`}>
             <div className="card-body">
                 <h6 className="card-title">
                     {name}

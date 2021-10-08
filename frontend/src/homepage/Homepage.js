@@ -1,10 +1,38 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import UserContext from "../auth/UserContext";
 
 function Homepage() {
+    const { currentUser } = useContext(UserContext);
 
     return (
-        <div>Hello, welcome to Jobly! Let's find you a job!</div>
-    )
+        <div className="Homepage">
+            <div className="container text-center">
+                <h1 className="mb-4 font-weight-bold">Jobly</h1>
+                <p className="lead">All the jobs, all right here.</p>
+                {currentUser
+                    ? <p>
+                        <h2>
+                            Welcome Back, {currentUser.firstName || currentUser.username}!
+                        </h2>
+                        <br />
+                        Let's get you a job!
+                    </p>
+                    : (
+                        <p>
+                            <Link className="btn btn-primary font-weight-bold mr-3"
+                                to="/login">
+                                Log in
+                            </Link>
+                            <Link className="btn btn-primary font-weight-bold"
+                                to="/signup">
+                                Sign up
+                            </Link>
+                        </p>
+                    )}
+            </div>
+        </div>
+    );
 }
 
 export default Homepage;

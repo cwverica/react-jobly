@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import JoblyApi from "../../../api";
+import JoblyApi from "../api/api";
 import JobList from "../jobs/JobList";
 
 
@@ -23,7 +23,7 @@ function CompDetail() {
     if (!company) return <div>Loading...</div>;
 
     return (
-        <div className="CompDetail">
+        <div className="CompDetail col-md-8 offset-md-2">
             <h3>{company.name}</h3>
             <p>{company.description}</p>
             <JobList jobs={company.jobs} />

@@ -1,4 +1,6 @@
+import React from "react";
 import { Link, NavLink } from "react-router-dom";
+import UserContext from "../auth/UserContext";
 
 /**  Navigation bar that shows up on every page.
  * 
@@ -6,29 +8,58 @@ import { Link, NavLink } from "react-router-dom";
 */
 
 function Navbar(logout) {
+    const { currentUser } = useContext(UserContext);
 
-    return (
-        <nav className="Navbar">
-            <Link className="nav-item brand" to='/'>
-                Jobly
-            </Link>
-            <ul className="navbar-list">
-                <li className="nav-item">
+    function loggedInNav() {
+        return (
+            <ul className="navbar-nav ml-auto">
+                <li className="nav-item mr-4">
                     <NavLink className="nav-link" to="/companies">
                         Companies
                     </NavLink>
                 </li>
-                <li className="nav-item">
+                <li className="nav-item mr-4">
                     <NavLink className="nav-link" to="/jobs">
                         Jobs
                     </NavLink>
                 </li>
-                <li className="nav-item">
+                <li className="nav-item mr-4">
                     <NavLink className="nav-link" to="/profile">
                         Profile
                     </NavLink>
                 </li>
+                <li className="nav-item">
+                    <Link className="nav-link" to="/" onClick={logout}>
+                        Log out {currentUser.first_name || currentUser.username}
+                    </Link>
+                </li>
             </ul>
+        );
+    }
+
+    function loggedOutNav() {
+        return (
+            <ul className="navbar-nav ml-auto">
+                <li className="nav-item mr-4">
+                    <NavLink className="nav-link" to="/login">
+                        Login
+                    </NavLink>
+                </li>
+                <li className="nav-item mr-4">
+                    <NavLink className="nav-link" to="/signup">
+                        Sign Up
+                    </NavLink>
+                </li>
+            </ul>
+        );
+    }
+
+    return (
+        <nav className="Navigation navbar navbar-expand-md">
+            <Link className="navbar-brand" to="/">
+                Jobly
+            </Link>
+            {currentUser ? loggedInNav() : loggedOutNav()}
         </nav>
     );
 }

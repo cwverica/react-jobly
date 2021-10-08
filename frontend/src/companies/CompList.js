@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import JoblyApi from "../../../api";
+import JoblyApi from "../api/api";
 import CompCard from "./CompCard";
 import SearchForm from "../common/SearchForm";
 
@@ -22,7 +22,7 @@ function CompList() {
 
     if (!companies) return <div>Loading...</div>;
     return (
-        <div className="CompList">
+        <div className="CompList col-md-8 offset-md-2">
             <SearchForm searchWith={getCompanyByName} />
             {companies.length
                 ? (
@@ -38,7 +38,7 @@ function CompList() {
                         ))}
                     </div>
                 ) : (
-                    <p>Sorry, no results were found!</p>
+                    <p className="lead">Sorry, no results were found!</p>
                 )}
         </div>);
 }
