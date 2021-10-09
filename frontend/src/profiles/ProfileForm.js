@@ -43,7 +43,7 @@ function ProfileForm() {
                 throw new Error(verify.err)
             }
         } catch (errors) {
-            debugger;
+            // debugger;
             setFormErrors(errors);
             return;
         }

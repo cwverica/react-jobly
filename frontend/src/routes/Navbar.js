@@ -1,13 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import UserContext from "../auth/UserContext";
+import './Navbar.css';
 
 /**  Navigation bar that shows up on every page.
  * 
  *  Rendered by App.js so it's highest possible level.
 */
 
-function Navbar(logout) {
+function Navbar({ logout }) {
     const { currentUser } = useContext(UserContext);
 
     function loggedInNav() {

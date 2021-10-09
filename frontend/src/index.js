@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 
+require('bootstrap');
 
 ReactDOM.render(
   <React.StrictMode>

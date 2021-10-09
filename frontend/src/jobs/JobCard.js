@@ -1,4 +1,6 @@
-import React, { useContext, useState } from "react";
+import React, { useState, useContext } from "react";
+import UserContext from "../auth/UserContext";
+import './JobCard.css';
 
 /** Show limited information about a job.
  *
@@ -7,7 +9,20 @@ import React, { useContext, useState } from "react";
 
 function JobCard({ id, title, salary, equity, companyName }) {
 
+    const { hasAppliedToJob, applyToJob } = useContext(UserContext);
+    const [applied, setApplied] = useState();
 
+    React.useEffect(function updateAppliedStatus() {
+
+        setApplied(hasAppliedToJob(id));
+    }, [id, hasAppliedToJob]);
+
+    /** Apply for a job */
+    async function handleApply(evt) {
+        if (hasAppliedToJob(id)) return;
+        applyToJob(id);
+        setApplied(true);
+    }
     return (
         <div className="JobCard card">
             <div className="card-body">
@@ -15,6 +30,13 @@ function JobCard({ id, title, salary, equity, companyName }) {
                 <p>{companyName}</p>
                 {salary && <div><small>Salary: {formatSalary(salary)}</small></div>}
                 {equity !== undefined && <div><small>Equity: {equity}</small></div>}
+                <button
+                    className="btn btn-danger font-weight-bold text-uppercase float-right"
+                    onClick={handleApply}
+                    disabled={applied}
+                >
+                    {applied ? "Applied" : "Apply"}
+                </button>
             </div>
         </div>
     );

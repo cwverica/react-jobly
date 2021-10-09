@@ -16,12 +16,7 @@ function LoginForm({ login }) {
     });
     const [formErrors, setFormErrors] = useState([]);
 
-    console.debug(
-        "LoginForm",
-        "login=", typeof login,
-        "formData=", formData,
-        "formErrors", formErrors,
-    );
+
 
     /** Handle form submit:
      *

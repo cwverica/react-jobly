@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import './CompCard.css'
 
 /** Component renders a card with limited info about a company.
  * Used by CompList.

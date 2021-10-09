@@ -26,7 +26,8 @@ class JoblyApi {
       : {};
 
     try {
-      return (await axios({ url, method, data, params, headers })).data;
+      let res = (await axios({ url, method, data, params, headers })).data;
+      return res;
     } catch (err) {
       console.error("API Error:", err.response);
       let message = err.response.data.error.message;
@@ -78,20 +79,34 @@ class JoblyApi {
     return res.user;
   }
 
+  /** Get the current user. */
+
+  static async getCurrentUser(username) {
+    let res = await this.request(`users/${username}`);
+    return res.user;
+  }
+
   /** Authenticate user */
   static async authenticateUser(username, password) {
-    let res = await this.request('auth/token', data, "post");
+    let res = await this.request('auth/token', { username, password }, "post");
     if (res.token) {
-      return { sucess: true, token: res.token };
+      return { success: true, token: res.token };
     } else {
-      return { success: false, err: res };
+      return { success: false, err: res.unauth };
     }
-
   }
+
+  /** Apply to a job */
+
+  static async applyToJob(username, id) {
+    await this.request(`users/${username}/jobs/${id}`, {}, "post");
+  }
+
+}
 
 // for now, put token ("testuser" / "password" on class)
 JoblyApi.token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZ" +
-    "SI6InRlc3R1c2VyIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTU5ODE1OTI1OX0." +
-    "FtrMwBQwe6Ue-glIFgz_Nf8XxRT2YecFCiSpYL0fCXc";
+  "SI6InRlc3R1c2VyIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTU5ODE1OTI1OX0." +
+  "FtrMwBQwe6Ue-glIFgz_Nf8XxRT2YecFCiSpYL0fCXc";
 
 export default JoblyApi;

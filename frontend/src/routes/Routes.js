@@ -7,9 +7,10 @@ import CompDetail from "../companies/CompDetail";
 import LoginForm from "../auth/LoginForm";
 import ProfileForm from "../profiles/ProfileForm";
 import SignupForm from "../auth/SignupForm";
+import ProtectedRoute from "./ProtectedRoute";
 
 // Skeleton of navigation for homepage
-function Routes(login, signup) {
+function Routes({ login, signup }) {
 
     return (
         <div>
@@ -18,17 +19,17 @@ function Routes(login, signup) {
                     <Homepage />
                 </Route>
 
-                <Route exact path="/companies">
+                <ProtectedRoute exact path="/companies">
                     <CompList />
-                </Route>
+                </ProtectedRoute>
 
-                <Route exact path="/companies/:handle">
+                <ProtectedRoute exact path="/companies/:handle">
                     <CompDetail />
-                </Route>
+                </ProtectedRoute>
 
-                <Route exact path="/jobs">
+                <ProtectedRoute exact path="/jobs">
                     <JobList />
-                </Route>
+                </ProtectedRoute>
 
                 <Route exact path="/login">
                     <LoginForm login={login} />
@@ -38,9 +39,9 @@ function Routes(login, signup) {
                     <SignupForm signup={signup} />
                 </Route>
 
-                <Route path="/profile">
+                <ProtectedRoute path="/profile">
                     <ProfileForm />
-                </Route>
+                </ProtectedRoute>
 
                 <Redirect to="/" />
             </Switch>

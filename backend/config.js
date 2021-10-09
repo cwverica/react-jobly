@@ -9,11 +9,19 @@ const SECRET_KEY = process.env.SECRET_KEY || "secret-dev";
 
 const PORT = +process.env.PORT || 3001;
 
+const PSQL_STRING = process.env.PSQL_STRING || null;
+
 // Use dev database, testing database, or via env var, production database
 function getDatabaseUri() {
-  return (process.env.NODE_ENV === "test")
+  if (PSQL_STRING) {
+    return (PSQL_STRING + ((process.env.NODE_ENV === "test")
       ? "jobly_test"
-      : process.env.DATABASE_URL || "jobly";
+      : process.env.DATABASE_URL || "jobly")
+    )
+  }
+  return (process.env.NODE_ENV === "test")
+    ? "jobly_test"
+    : process.env.DATABASE_URL || "jobly";
 }
 
 // Speed up bcrypt during tests, since the algorithm safety isn't being tested
@@ -25,7 +33,7 @@ console.log("Jobly Config:".green);
 console.log("SECRET_KEY:".yellow, SECRET_KEY);
 console.log("PORT:".yellow, PORT.toString());
 console.log("BCRYPT_WORK_FACTOR".yellow, BCRYPT_WORK_FACTOR);
-console.log("Database:".yellow, getDatabaseUri());
+console.log("Database:".yellow, getDatabaseUri().slice(-10));
 console.log("---");
 
 module.exports = {
