@@ -7,6 +7,13 @@
 
 # testing
 /coverage
+src/auth/__snapshots__
+src/common/__snapshots__
+src/companies/__snapshots__
+src/jobs/__snapshots__
+src/routes/__snapshots__
+src/profiles/__snapshots__
+src/homepage/__snapshots__
 
 # production
 /build

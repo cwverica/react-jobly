@@ -13,13 +13,13 @@ function Homepage() {
                 <h1 className="mb-4 font-weight-bold">Jobly</h1>
                 <p className="lead">All the jobs, all right here.</p>
                 {currentUser
-                    ? <p>
+                    ? <div>
                         <h2>
                             Welcome Back, {currentUser.firstName || currentUser.username}!
                         </h2>
                         <br />
                         Let's get you a job!
-                    </p>
+                    </div>
                     : (
                         <p>
                             <Link className="btn btn-primary font-weight-bold mr-3"

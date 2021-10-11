@@ -7,7 +7,6 @@ import JobCard from "./JobCard";
  */
 
 function JobCardList({ jobs, apply }) {
-    console.debug("JobCardList", "jobs=", jobs);
 
     return (
         <div className="JobCardList">
